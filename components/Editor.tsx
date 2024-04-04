@@ -28,7 +28,7 @@ const config = {
     },
     DropzoneBlock: {
       render: () => 
-        <DropZone zone="block" />,
+        <DropZone zone='test' />,
     },
     ImageBlock: {
       render: () => {
