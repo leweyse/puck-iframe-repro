@@ -1,9 +1,18 @@
 "use client"
 
-import { loadStripe } from "@stripe/stripe-js";
-import { Puck } from "@measured/puck";
+import { DropZone, Puck } from "@measured/puck";
+
+import { atomWithStorage } from "jotai/utils";
+import { useAtom } from "jotai";
+
 import "@measured/puck/puck.css";
-import {useEffect} from "react";
+
+const dataAtom = atomWithStorage("puck-data", {
+  content: [],
+  root: {},
+}, undefined, {
+  getOnInit: true,
+});
 
 const config = {
   components: {
@@ -14,32 +23,29 @@ const config = {
         },
       },
       render: ({ children }) => {
-        return <h1>{children}</h1>;
+        return <span>{children}</span>;
       },
     },
+    DropzoneBlock: {
+      render: () => 
+        <DropZone zone="block" />,
+    },
+    ImageBlock: {
+      render: () => {
+        return <img src="https://cdn.candycode.com/jotai/jotai-mascot.png" />;
+      }
+    }
   },
 };
 
-const initialData = {
-  content: [],
-  root: {},
-};
-
-const save = (data) => {};
-
 const Editor = () => {
+  const [data, setData] = useAtom(dataAtom);
 
-  useEffect(() => {
-    loadStripe("key")
-      .then(stripe => {
-        console.log(stripe, 'stripe')
-      })
-      .catch(err => {
-        console.error(err);
-      });
-  }, []);
+  const save = (data) => {
+    setData(data);
+  };
 
-  return <Puck config={config} iframe={{enabled: false}} data={initialData} onPublish={save} />;
+  return <Puck config={config} data={data} onPublish={save} />;
 }
 
 export default Editor;

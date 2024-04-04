@@ -1,5 +1,5 @@
 {
-  "name": "my-nextjs-project",
+  "name": "puck-iframe-repro",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,9 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@hello-pangea/dnd": "^16.6.0",
-    "@measured/puck": "^0.14.1",
+    "@measured/puck": "0.14.2-canary.268ea53",
     "@stripe/stripe-js": "^3.2.0",
+    "jotai": "^2.7.2",
     "next": "13.5.6",
     "react": "^18",
     "react-dom": "^18"
